@@ -27,7 +27,7 @@ The codes can only be run Linux (tested on >=Ubuntu 20.04). The codebase uses FF
 ### 3) Downloading Dataset 
 For quick validation of the reported results we have provided all the necessary traces, scripts, and pre-processed files at [Zenodo](""). Simply download and extract it in the current path.
 
-### 4) Reproducing results
+### 4) Reproducing Results
 To quickly reproduce the results reported in the paper, the necessary text and pickle files are place in the `Results` downloaded as directed above. Simply place the extracted `Results` directory at current path. The utilize the `generateResults.ipynb` notebook file to generate the plots. Note this notebook file must be run locally, not on Google Colab, as it parses the files inside `Results` to generate results. The `generateResults.ipynb` file can be run inside VS Code IDE or Jupyter Notebook.
 
 ## How to run COMPACT and Baselines?
