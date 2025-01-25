@@ -25,9 +25,12 @@ This repository contains codes/artifacts for the paper "COMPACT: Content-aware M
 The codes can only be run Linux (tested on >=Ubuntu 20.04). The codebase uses FFmepg, GPAC, and Kvazaar to encode and stream tiled videos. FFmpeg can be directly installed using `sudo apt install ffmpeg` command. However, [Kvazaar](https://github.com/ultravideo/kvazaar) and [GPAC](https://github.com/gpac/gpac/wiki/Build-Introduction) requires them to build. Follow the build instructions in their respective repositories. For GPAC, go with a full GPAC build, not the minimal ones. The clock and the Jupyter notebook uses Python 3.8.10. All the python libraries can be installed using `pip3 install -r requirements.txt`. The entire code of COMPACT and the baselines is in Java. Use IntelliJ to run the codes. Install OpenCV 4.7.0 for Java in IntelliJ on both server and primary devices.
 
 ### 3) Downloading Dataset 
-Note that only the video bitrates are available as intermediate results. You can generate you own tiled videos using the codes discussed in Section "Tile Encoding".
+For quick validation of the reported results we have provided all the necessary traces, scripts, and pre-processed files at [Zenodo](""). Simply download and extract it in the current path.
 
-### 4) How to run?
+### 4) Reproducing results
+To quickly reproduce the results reported in the paper, the necessary text and pickle files are place in the `Results` downloaded as directed above. Simply place the extracted `Results` directory at current path. The utilize the `generateResults.ipynb` notebook file to generate the plots. Note this notebook file must be run locally, not on Google Colab, as it parses the files inside `Results` to generate results. The `generateResults.ipynb` file can be run inside VS Code IDE or Jupyter Notebook.
+
+## How to run COMPACT and Baselines?
 - **For multi-Path with only tile-level baseline schedulers:**
 Use the code available in `WithOpenCVPlayer_PerPktTimestamp_baseline_schedulers_only` folder. First, run the server in IntelliJ. Then, at the helper, run SOCAT command `socat -b2500 SCTP4:server-ip:serverToHelper-port SCTP4-LISTEN:clientToHelper-port` for the video channel and in another terminal run `socat UDP4-LISTEN:8002,fork UDP4:server-ip:8002` for the control channel for RTT Estimation. Finally, run the client in IntelliJ at the user side. *Note you need to change the server and helper IP and Port in the client's `Main.java` code before executing.*
 
