@@ -5,7 +5,7 @@ This repository contains codes/artifacts for the paper "COMPACT: Content-aware M
 ## Getting Started
 ### 1) Directory Structure
 ```
-└── QPs                                                         : Contains text files with FG and BG QPs of COMPACT for each video of every trace
+└── QPs                                                         : Contains text files with FG and BG QPs of COMPACT for each video of every trace. These are fed to each schedulers to keep the quality levels same for fairness.
 |
 └── WithOpenCVPlayer_baseline_packet_level                      : Contains source code for packet level baseline schedulers
 |
@@ -18,21 +18,23 @@ This repository contains codes/artifacts for the paper "COMPACT: Content-aware M
 └── new_clock_serv.py                                           : Code to run the live digital clock on screen to clculate E2E lag
 |
 └── clockTest_edited.ipynb                                      : Jupyter notebook to extract text from the recorded video of live clocks
+|
+└── Results                                                     : Available once the dataset is downloaded and extracted. Contains pre-processed files for quick result validation.
 
 ```
 
 ### 2) Dependencies
-The codes can only be run Linux (tested on >=Ubuntu 20.04). The codebase uses FFmepg, GPAC, and Kvazaar to encode and stream tiled videos. FFmpeg can be directly installed using `sudo apt install ffmpeg` command. However, [Kvazaar](https://github.com/ultravideo/kvazaar) and [GPAC](https://github.com/gpac/gpac/wiki/Build-Introduction) requires them to build. Follow the build instructions in their respective repositories. For GPAC, go with a full GPAC build, not the minimal ones. The clock and the Jupyter notebook uses Python 3.8.10. All the python libraries can be installed using `pip3 install -r requirements.txt`. The entire code of COMPACT and the baselines is in Java. Use IntelliJ to run the codes. Install OpenCV 4.7.0 for Java in IntelliJ on both server and primary devices. To replay traces, we reply on [Mahimahi](http://mahimahi.mit.edu/).
+The codes can only be run Linux (tested on >=Ubuntu 20.04). The codebase uses FFmepg, GPAC, and Kvazaar to encode and stream tiled videos. FFmpeg can be directly installed using `sudo apt install ffmpeg` command. However, [Kvazaar](https://github.com/ultravideo/kvazaar) and [GPAC](https://github.com/gpac/gpac/wiki/Build-Introduction) requires them to build. Follow the build instructions in their respective repositories. For GPAC, go with a full GPAC build, not the minimal ones. The clock and the Jupyter notebook uses Python 3.8.10. All the python libraries can be installed using `pip3 install -r requirements.txt`. The entire code of COMPACT and the baselines is in Java. Use IntelliJ to run the codes. Install OpenCV 4.7.0 for Java in IntelliJ on both server and primary devices. To replay traces, we rely on [Mahimahi](http://mahimahi.mit.edu/).
 
 ### 3) Downloading Dataset 
-For quick validation of the reported results we have provided all the necessary traces, scripts, and pre-processed files at [Zenodo](https://doi.org/10.5281/zenodo.14740088). Simply download and extract it in the current path. Links to the four videos used on the paper for experiments are:
+For quick validation of the reported results, we have provided all the necessary traces, scripts, and pre-processed files at [Zenodo](https://doi.org/10.5281/zenodo.14740088). Simply download and extract it in the current path. Links to the four videos used on the paper for experiments are:
 - [Video 1](https://www.youtube.com/watch?v=wiNXzydta4c)
 - [Video 2](https://www.youtube.com/watch?v=XtlwSmJfUs4)
 - [Video 3](https://www.youtube.com/watch?v=RPbtzWgzD9M)
 - [Video 4](https://www.youtube.com/watch?v=O--rkQNKqls)
 
 ### 4) Reproducing Results
-To quickly reproduce the results reported in the paper, the necessary text and pickle files are place in the `Results` downloaded as directed above. Simply place the extracted `Results` directory at current path. The utilize the `generateResults.ipynb` notebook file to generate the plots. Note this notebook file must be run locally, not on Google Colab, as it parses the files inside `Results` to generate results. The `generateResults.ipynb` file can be run inside VS Code IDE or Jupyter Notebook.
+To quickly reproduce the results reported in the paper, the necessary text and pickle files are placed inside `Results` folder downloaded as directed above. Simply place the extracted `Results` directory at the current path. Then utilize the `generateResults.ipynb` notebook file to generate the plots. Note this notebook file must be run locally, not on Google Colab, as it parses the files inside `Results` to generate results. The `generateResults.ipynb` file can be run inside VS Code IDE or Jupyter Notebook.
 
 ## How to run COMPACT and Baselines?
 - **For multi-Path with only tile-level baseline schedulers:**
