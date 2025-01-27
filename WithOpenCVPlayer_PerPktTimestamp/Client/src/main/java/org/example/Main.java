@@ -251,6 +251,7 @@ class PlayerHelper implements Runnable {
     Stats stats = new Stats();
     private long lastRenderTime = 0;
     private String logFile;
+    private Mat cachedTiles;
     public PlayerHelper(String resolution, EvictingQueue pQueue, EvictingQueue hQueue, ArrayList<Future> results, Stats stats, String logFile) {
         this.primaryQueue = pQueue;
         this.helperQueue = hQueue;
@@ -277,8 +278,12 @@ class PlayerHelper implements Runnable {
                 }
                 String helperString = helperQueue.take(); // Waits for 40ms for BG to be available
 
-                String fgFileName; String bgFileName = null; String[] t = null;
+                String fgFileName; String bgFileName = null; String[] t = null; String[] y = null;
                 int fgFileIndex = -1; int bgFileIndex = -1;
+                y = primaryStrings[1].split(",");
+                y = Arrays.copyOf(y, y.length + 1);
+                y[y.length - 1] = "00"; // Adding tile "00" manually
+
                 if (helperString != null) {
                     // Renders with previous BG if available
                     helperStrings = helperString.split("_");
@@ -355,6 +360,7 @@ class PlayerHelper implements Runnable {
 
                 VideoCapture captFg = new VideoCapture(fgFileName);
                 VideoCapture captBg = null; Mat bgFrame = null;
+                VideoCapture captCache = new VideoCapture(fgFileName);; // for caching all the tiles
                 if (onlyFG == false){
                     captBg = new VideoCapture(bgFileName);
                     bgFrame = new Mat();
@@ -368,21 +374,38 @@ class PlayerHelper implements Runnable {
 //                System.out.println("Stall FG BG: " + stall);
                 Files.write(Paths.get(this.logFile), stall.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 
+                bool firstRun = true;
                 while (true) {
                     boolean retFg = captFg.read(fgFrame);
 //                    System.out.println("Return: " + retFg);
+                    if(retFg ==true & firstRun == true){
+                        System.out.println("Initialized Cache Matrix" + fgFileIndex);
+                        fgFrame.copyTo(this.cachedTiles);
+                        firstRun = false;
+                    }
 
                     if (onlyFG == false) {
                         boolean retBg = captBg.read(bgFrame);
                         if (retBg) {
+                            stitcher.stitchFrame(fgFrame, this.cachedTiles, y);
+                            stitcher.stitchFrame(bgFrame, this.cachedTiles, t);
                             long t3 = System.currentTimeMillis();
-                            stitcher.stitchFrame(bgFrame, fgFrame, t);
+                            stitcher.stitchFrame(this.cachedTiles, fgFrame, t);
                             long t4 = System.currentTimeMillis();
-                            System.out.println("[Stitching Time]: " + (t4 -t3));
+                            System.out.println("[Stitching Time]: " + (t4 - t3));
                         }
                     }
+                    if (onlyFG) {
+                        try{
+                            stitcher.stitchFrame(fgFrame, this.cachedTiles, y);
+                            System.out.println("Stitching FG and cached BG");
+                            System.out.println("Used Cached tiles");
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }                    
                     if (retFg) {
-                        HighGui.imshow("MainWindow", fgFrame);
+                        HighGui.imshow("MainWindow", this.cachedTiles);
                         HighGui.waitKey(40);
 //                        System.out.println("Rendered");
                     } else {
