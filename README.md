@@ -19,6 +19,16 @@ This repository contains codes/artifacts for the paper "COMPACT: Content-aware M
 |
 └── clockTest_edited.ipynb                                      : Jupyter notebook to extract text from the recorded video of live clocks
 |
+└── inside_mahimahi_client.sh                                   : Script to run inside Mahimahi link shell for primary path trace
+|
+└── outside_mahimahi_client.sh                                  : Script to run outside Mahimahi link shell for primary path trace
+|
+└── inside_mahimahi_helper.sh                                   : Script to run inside Mahimahi link shell for helper path trace
+|
+└── outside_mahimahi_helper.sh                                  : Script to run outside Mahimahi link shell for helper path trace
+|
+└── outside_mahimahi_helper_live.sh                             : Script to run outside Mahimahi link shell for helper path trace in live setup
+|
 └── Results                                                     : Available once the dataset is downloaded and extracted. Contains pre-processed files for quick result validation.
 
 ```
