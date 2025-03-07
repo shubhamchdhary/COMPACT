@@ -64,7 +64,7 @@ We use clockTest_edited.ipynb to detect clock using OCR.
 [Running Baselines and COMPACT](https://drive.google.com/file/d/1utVCg4F4r_Xn3sbA2EZFZu03TcXxu44r/view?usp=drive_link)
 
 ## Citing TileClipper
-```
+```bibtex
 @inproceedings {compact,
 author = {Shubham Chaudhary and Navneet Mishra and Keshav Gambhir and Tanmay Rajore and Arani Bhattacharya and Mukulika Maity},
 title = {COMPACT: Content-aware Multipath Live Video Streaming for Online Classes using Video Tiles},
