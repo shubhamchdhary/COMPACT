@@ -59,3 +59,19 @@ Use the code available in `WithOpenCVPlayer_PerPktTimestamp` folder. First, run 
 *NOTE: To simulate a network using Mahimahi traces. Use a different PC, start an mm-link shell with appropriate trace file and run `socat UDP4-LISTEN:8001,fork UDP4:server-ip:8001 & socat UDP4-LISTEN:8003,fork UDP4:server-ip:8003 & socat UDP4-LISTEN:8004,fork UDP4:server-ip:8004 & socat -b20000 SCTP4-LISTEN:6002 SCTP4:server-ip:6002` inside the shell. Run `socat UDP4-LISTEN:8001,fork UDP4:link-shell-ip:8001 & socat UDP4-LISTEN:8003,fork UDP4:link-shell-ip:8003 & socat UDP4-LISTEN:8004,fork UDP4:link-shell-ip:8004 & socat -b20000 SCTP4-LISTEN:6002 SCTP4:link-shell-ip:6002` in another terminal outside the Mahimahi link shell. This will redirect packets from the outer world to the shell, add network characteristics, and send back again outside. This is for primary channel. For secondary, run `socat UDP4-LISTEN:8002,fork UDP4:server-ip:8002 & socat -b20000 SCTP4:server-ip:6003 SCTP4-LISTEN:7003` inside and `socat UDP4-LISTEN:8002,fork UDP4:link-shell-ip:8002 & socat -b20000 SCTP4:link-shell-ip:7003 SCTP4-LISTEN:7003` outside.*
 
 We use clockTest_edited.ipynb to detect clock using OCR.
+
+## Demo Video
+[![](https://drive.google.com/file/d/1utVCg4F4r_Xn3sbA2EZFZu03TcXxu44r/view?usp=drive_link)]
+
+## Citing TileClipper
+```
+@inproceedings {compact,
+author = {Shubham Chaudhary and Navneet Mishra and Keshav Gambhir and Tanmay Rajore and Arani Bhattacharya and Mukulika Maity},
+title = {COMPACT: Content-aware Multipath Live Video Streaming for Online Classes using Video Tiles},
+booktitle = {2025 ACM Multimedia Systems Conference (ACM MMSys'25)},
+year = {2025},
+isbn = {979-8-4007-1467-2/25/03},
+address = {Stellenbosch, South Africa},
+doi = {https://doi.org/10.1145/3712676.3714451}
+}
+```
