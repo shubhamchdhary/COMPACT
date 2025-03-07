@@ -61,7 +61,7 @@ Use the code available in `WithOpenCVPlayer_PerPktTimestamp` folder. First, run 
 We use clockTest_edited.ipynb to detect clock using OCR.
 
 ## Demo Video
-[![](https://drive.google.com/file/d/1utVCg4F4r_Xn3sbA2EZFZu03TcXxu44r/view?usp=drive_link)]
+[![](https://drive.google.com/file/d/1utVCg4F4r_Xn3sbA2EZFZu03TcXxu44r/view?usp=drive_link)](https://drive.google.com/file/d/1utVCg4F4r_Xn3sbA2EZFZu03TcXxu44r/view?usp=drive_link)
 
 ## Citing TileClipper
 ```
