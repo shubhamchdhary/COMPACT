@@ -251,7 +251,8 @@ class PlayerHelper implements Runnable {
     Stats stats = new Stats();
     private long lastRenderTime = 0;
     private String logFile;
-    private Mat cachedTiles;
+    private Mat cachedTiles = new Mat();
+    private boolean firstRun = true;
     public PlayerHelper(String resolution, EvictingQueue pQueue, EvictingQueue hQueue, ArrayList<Future> results, Stats stats, String logFile) {
         this.primaryQueue = pQueue;
         this.helperQueue = hQueue;
@@ -374,14 +375,13 @@ class PlayerHelper implements Runnable {
 //                System.out.println("Stall FG BG: " + stall);
                 Files.write(Paths.get(this.logFile), stall.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 
-                bool firstRun = true;
                 while (true) {
                     boolean retFg = captFg.read(fgFrame);
 //                    System.out.println("Return: " + retFg);
-                    if(retFg ==true & firstRun == true){
+                    if(retFg & this.firstRun){
                         System.out.println("Initialized Cache Matrix" + fgFileIndex);
                         fgFrame.copyTo(this.cachedTiles);
-                        firstRun = false;
+                        this.firstRun = false;
                     }
 
                     if (onlyFG == false) {
