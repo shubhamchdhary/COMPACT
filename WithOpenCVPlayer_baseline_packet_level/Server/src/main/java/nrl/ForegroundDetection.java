@@ -16,9 +16,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 class TilesOfFGAndBG {
@@ -83,20 +87,20 @@ public class ForegroundDetection implements Runnable{
     }
 
     public Set<Integer> tilesWithFaces(Mat detections, int screenWidth, int screenHeight) {
-        Set<Integer> tilesWithFaces = new HashSet<Integer>() {
-        };
-        int numOfFaces = detections.size(2);
-        for (int face = 0; face < numOfFaces; face++) {
-            double conf = detections.get(new int[]{0, 0, face, 2})[0]; // returns confidence score
-            if (conf > this.minConfidence) {
-                double face_x = detections.get(new int[]{0, 0, face, 3})[0] * screenWidth;
-                double face_y = detections.get(new int[]{0, 0, face, 4})[0] * screenHeight;
-                double face_w = detections.get(new int[]{0, 0, face, 5})[0] * screenWidth - face_x;
-                double face_h = detections.get(new int[]{0, 0, face, 6})[0] * screenHeight - face_y;
-                tilesWithFaces.addAll(this.getTile(face_x, face_y, face_w, face_h));
-            }
-        }
-        return tilesWithFaces;
+        return IntStream.range(0,detections.size(2))
+        .parallel().mapToObj(face -> {
+            double conf = detections.get(new int[]{0,0,face,2})[0];
+            if (conf <= this.minConfidence) 
+            return null;
+            double face_x = detections.get(new int[]{0, 0, face, 3})[0] * screenWidth;
+            double face_y = detections.get(new int[]{0, 0, face, 4})[0] * screenHeight;
+            double face_w = detections.get(new int[]{0, 0, face, 5})[0] * screenWidth - face_x;
+            double face_h = detections.get(new int[]{0, 0, face, 6})[0] * screenHeight - face_y;
+            return this.getTile(face_x, face_y, face_w, face_h);
+    })
+    .filter(Objects::nonNull)  
+    .flatMap(Collection::stream)
+    .collect(Collectors.toSet());
     }
 
     public Mat inferFromImage(Mat image){
