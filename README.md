@@ -65,13 +65,20 @@ We use clockTest_edited.ipynb to detect clock using OCR.
 
 ## Citing TileClipper
 ```bibtex
-@inproceedings {compact,
-author = {Shubham Chaudhary and Navneet Mishra and Keshav Gambhir and Tanmay Rajore and Arani Bhattacharya and Mukulika Maity},
+@inproceedings{compact,
+author = {Chaudhary, Shubham and Mishra, Navneet and Gambhir, Keshav and Rajore, Tanmay and Bhattacharya, Arani and Maity, Mukulika},
 title = {COMPACT: Content-aware Multipath Live Video Streaming for Online Classes using Video Tiles},
-booktitle = {2025 ACM Multimedia Systems Conference (ACM MMSys'25)},
 year = {2025},
-isbn = {979-8-4007-1467-2/25/03},
-address = {Stellenbosch, South Africa},
-doi = {https://doi.org/10.1145/3712676.3714451}
+isbn = {9798400714672},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3712676.3714451},
+doi = {10.1145/3712676.3714451},
+booktitle = {Proceedings of the 16th ACM Multimedia Systems Conference},
+pages = {201–213},
+numpages = {13},
+keywords = {multipath, live video streaming, video tiles, live online class},
+location = {Stellenbosch, South Africa},
+series = {MMSys '25}
 }
 ```
