@@ -1,6 +1,6 @@
 # COMPACT
 ## Introduction
-This repository contains codes/artifacts for the paper "COMPACT: Content-aware Multipath Live Video Streaming for Online Classes using Video Tiles", published at ACM Multimedia Systems Conference (MMSys) 2025. COMPACT is a system for live streaming online classes that utilizes tiles to seggregate the video content into foreground (FG) and background (BG). Then a content-aware scheduler streams the FG and BG tiles over differnet paths available. Please write to shubhamch@iiitd.ac.in for any queries/doubts.
+This repository contains codes/artifacts for the paper "COMPACT: Content-aware Multipath Live Video Streaming for Online Classes using Video Tiles", published at ACM Multimedia Systems Conference (MMSys) 2025. COMPACT is a system for live streaming online classes that utilizes tiles to seggregate the video content into foreground (FG) and background (BG). Then a content-aware scheduler streams the FG and BG tiles over differnet paths available. Please write to shubhamch@iiitd.ac.in for any queries/doubts. COMPACT using QUIC: https://github.com/Wireless-Systems-Engineering-IIIT-Delhi/COMPAQT
 
 ## Getting Started
 ### 1) Directory Structure
